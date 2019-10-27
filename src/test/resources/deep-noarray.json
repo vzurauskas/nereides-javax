@@ -1,0 +1,21 @@
+{
+  "ocean": {
+    "rock1": {
+      "nereid1": {
+        "hair": "black",
+        "age": 100
+      },
+      "nereid2": {
+        "hair": "red",
+        "age": 77.5
+      }
+    },
+    "rock2": {
+      "nereid3": {
+        "hair": "blonde",
+        "age": 88,
+        "fair": true
+      }
+    }
+  }
+}
