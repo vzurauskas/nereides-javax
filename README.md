@@ -3,6 +3,7 @@
 
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 
+[![CircleCI](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master.svg?style=svg)](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master)
 [![Hits-of-Code](https://hitsofcode.com/github/vzurauskas/nereides-javax)](https://hitsofcode.com/view/github/vzurauskas/nereides-javax) 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/vzurauskas/nereides-javax/blob/master/LICENSE)
 
