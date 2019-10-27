@@ -1,4 +1,4 @@
-package com.vzurauskas.nereides.jdk;
+package com.vzurauskas.nereides.javax;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
