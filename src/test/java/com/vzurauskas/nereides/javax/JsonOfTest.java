@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.json.JsonStructure;
 import javax.json.JsonWriter;
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +50,20 @@ final class JsonOfTest {
                     new ByteArrayInputStream(bytes)
                 )
             ).value()
+        );
+    }
+
+    @Test
+    void constructsFromJsonStructure() {
+        JsonStructure struct = javax.json.Json.createObjectBuilder()
+            .add("field1", "value1")
+            .add("field2", "value2")
+            .build();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        javax.json.Json.createWriter(stream).write(struct);
+        assertArrayEquals(
+            stream.toByteArray(),
+            new ByteArray(new Json.Of(struct)).value()
         );
     }
 
