@@ -1,4 +1,4 @@
-package com.vzurauskas.nereides.jdk;
+package com.vzurauskas.nereides.javax;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

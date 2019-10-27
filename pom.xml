@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.vzurauskas.nereides</groupId>
-    <artifactId>nereides-jdk</artifactId>
+    <artifactId>nereides-javax</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Nereides for JDK</name>
+    <name>Nereides for javax.json</name>
     <description>An object-oriented JSON wrapper for javax.json.</description>
-    <url>https://github.com/vzurauskas/nereides-jdk</url>
+    <url>https://github.com/vzurauskas/nereides-javax</url>
     <packaging>jar</packaging>
 
     <licenses>
@@ -29,9 +29,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/vzurauskas/nereides-jdk.git</connection>
-        <developerConnection>scm:git:ssh://github.com/vzurauskas/nereides-jdk.git</developerConnection>
-        <url>https://github.com/vzurauskas/nereides-jdk/tree/master</url>
+        <connection>scm:git:git://github.com/vzurauskas/nereides-javax.git</connection>
+        <developerConnection>scm:git:ssh://github.com/vzurauskas/nereides-javax.git</developerConnection>
+        <url>https://github.com/vzurauskas/nereides-javax/tree/master</url>
     </scm>
 
     <properties>

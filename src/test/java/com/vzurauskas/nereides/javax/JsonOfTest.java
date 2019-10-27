@@ -1,4 +1,4 @@
-package com.vzurauskas.nereides.jdk;
+package com.vzurauskas.nereides.javax;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import java.io.ByteArrayInputStream;
