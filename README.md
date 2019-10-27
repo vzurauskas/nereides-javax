@@ -33,9 +33,11 @@ Json json = new Json.Of(jsonAsString);
 InputStream stream = new ByteArrayInputStream(jsonAsString.getBytes());
 json = new Json.Of(stream);
 
-// From Jackson's JsonNode:
-JsonNode node = new ObjectMapper().readTree(jsonAsString);
-json = new Json.Of(node);
+// From javax.json.JsonStructure:
+JsonStructure structure = javax.json.Json.createReader(
+    new StringReader(jsonAsString)
+).read();
+json = new Json.Of(structure);
 ```
 
 ## Custom implementations
