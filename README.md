@@ -2,6 +2,7 @@
 
 
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
+[![DevOps By Rultor.com](http://www.rultor.com/b/vzurauskas/nereides-javax)](http://www.rultor.com/b/vzurauskas/nereides-javax)
 
 [![CircleCI](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master.svg?style=svg)](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master)
 [![Hits-of-Code](https://hitsofcode.com/github/vzurauskas/nereides-javax)](https://hitsofcode.com/view/github/vzurauskas/nereides-javax) 
