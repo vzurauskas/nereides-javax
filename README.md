@@ -3,8 +3,9 @@
 
 [![EO principles respected here](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org)
 
-[![CircleCI](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master.svg?style=svg)](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master)
+[![CircleCI](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master.svg?style=svg)](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master) 
 [![Hits-of-Code](https://hitsofcode.com/github/vzurauskas/nereides-javax)](https://hitsofcode.com/view/github/vzurauskas/nereides-javax) 
+[![Maven Central](https://img.shields.io/maven-central/v/com.vzurauskas.nereides/nereides-javax)](https://search.maven.org/search?q=a:nereides-javax) 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/vzurauskas/nereides-javax/blob/master/LICENSE)
 
 Nereid* for javax.json is an object oriented JSON library wrapper for [JSR 374 (JSON Processing) API](https://javadoc.io/doc/javax.json/javax.json-api/1.1.4/overview-summary.html). It allows developers to work with JSONs in a purely object oriented way: everything is instantiated via constructors, there are no static methods, no nulls and no "mappers" or "builders". Most importantly, the core `Json` interface lends itself to easy custom implementations, making Nereides very extensible.
