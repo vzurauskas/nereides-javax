@@ -59,8 +59,11 @@ public interface Json {
                 flattened(
                     () -> {
                         try (
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            JsonWriter writer = javax.json.Json.createWriter(stream)
+                            ByteArrayOutputStream stream
+                                = new ByteArrayOutputStream();
+                            JsonWriter writer = javax.json.Json.createWriter(
+                                stream
+                            )
                         ) {
                             writer.write(json.get());
                             return stream.toByteArray();
