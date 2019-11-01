@@ -5,6 +5,7 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/vzurauskas/nereides-javax)](http://www.rultor.com/b/vzurauskas/nereides-javax)
 
 [![CircleCI](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master.svg?style=svg)](https://circleci.com/gh/vzurauskas/nereides-javax/tree/master) 
+[![Codecov](https://img.shields.io/codecov/c/github/vzurauskas/nereides-javax/master)](https://codecov.io/gh/vzurauskas/nereides-javax)
 [![Hits-of-Code](https://hitsofcode.com/github/vzurauskas/nereides-javax)](https://hitsofcode.com/view/github/vzurauskas/nereides-javax) 
 [![Maven Central](https://img.shields.io/maven-central/v/com.vzurauskas.nereides/nereides-javax)](https://search.maven.org/search?q=a:nereides-javax) 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/vzurauskas/nereides-javax/blob/master/LICENSE)
