@@ -10,7 +10,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.vzurauskas.nereides/nereides-javax)](https://search.maven.org/search?q=a:nereides-javax) 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/vzurauskas/nereides-javax/blob/master/LICENSE)
 
-Nereid* for javax.json is an object oriented JSON library wrapper for [JSR 374 (JSON Processing) API](https://javadoc.io/doc/javax.json/javax.json-api/1.1.4/overview-summary.html). It allows developers to work with JSONs in a purely object oriented way: everything is instantiated via constructors, there are no static methods, no nulls and no "mappers" or "builders". Most importantly, the core `Json` interface lends itself to easy custom implementations, making Nereides very extensible.
+Nereid* for javax.json is an object oriented JSON library wrapper for [JSR 374 (JSON Processing) API](https://javadoc.io/doc/javax.json/javax.json-api/1.1.4/overview-summary.html). It allows developers to work with JSON documents in a purely object oriented way: everything is instantiated via constructors, there are no static methods, no nulls and no "mappers" or "builders". Most importantly, the core `Json` interface lends itself to easy custom implementations, making Nereides very extensible.
 
 There is also a [Nereid for jackson-databind](https://github.com/vzurauskas/nereides-jackson).
 
@@ -21,7 +21,7 @@ There is also a [Nereid for jackson-databind](https://github.com/vzurauskas/nere
 <dependency>
     <groupId>com.vzurauskas.nereides</groupId>
     <artifactId>nereides-javax</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
@@ -62,6 +62,43 @@ Optional<String> leaf = new SmartJson(json).leaf("nymph");
 SmartJson nested = new SmartJson(json).at("/path/to/nested/json");
 ```
 
+### MutableJson
+While the main purpose of this library is to enable making custom implementations of the `Json` interface (see more on that below), if you need to quickly assemble a `Json` by hand, `MutableJson` can be used. This API has a very declarative notation.
+```java
+Json json = new MutableJson().with(
+    "ocean",
+    new MutableJson().with(
+        "nereid1",
+        new MutableJson()
+            .with("name", "Thetis")
+            .with("hair", "black")
+    ).with(
+        "nereid2",
+        new MutableJson()
+            .with("name", "Actaea")
+            .with("hair", "blonde")
+    )
+    .with("stormy", true)
+);
+System.out.println(new SmartJson(json).pretty());
+```
+The code above would print this:
+```json
+{
+  "ocean" : {
+    "nereid1" : {
+      "name" : "Thetis",
+      "hair" : "black"
+    },
+    "nereid2" : {
+      "name" : "Actaea",
+      "hair" : "blonde"
+    },
+    "stormy" : true
+  }
+}
+```
+
 ## Custom implementations
 If you have an object which needs to be able to display itself as JSON, sometimes it might be useful to just treat it as a JSON to begin with. In that case that object will have to implement a JSON interface. In most (all?) other libraries, JSON interfaces are huge, making it very difficult to implement them. With Nereides, all you need to do is provide the JSON representation in a stream of bytes. The easiest way to do this is to encapsulate another `Json` and delegate to it, or construct one on the spot.
 
@@ -96,7 +133,7 @@ return new ResponseEntity<>(
     HttpStatus.OK
 );
 ```
-Or with [Takes](https://github.com/yegor256/takes):
+...or with [Takes](https://github.com/yegor256/takes):
 ```java
 return new RsWithType(
     new RsWithStatus(
@@ -108,12 +145,12 @@ return new RsWithType(
     "application/json"
 );
 ```
-Or insert it in some JSON datastore:
+...or insert it in some JSON datastore:
 ```java
 accounts.insert(new BankAccount(iban, nickname));
 ```
 
-Or compose it within a larger JSON:
+...or compose it within a larger JSON:
 ```java
 Json accounts = new MutableJson()
     .with("name", "John")
