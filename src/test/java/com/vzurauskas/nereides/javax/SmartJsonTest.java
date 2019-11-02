@@ -311,6 +311,15 @@ final class SmartJsonTest {
         );
     }
 
+    @Test
+    void handlesNonExistentPaths() {
+        assertTrue(
+            new SmartJson(
+                new Json.Of(deep)
+            ).at("/ocean/nothing").isMissing()
+        );
+    }
+
     @Disabled("https://github.com/vzurauskas/nereides-javax/issues/26")
     @Test
     void understandsArrays() {
@@ -334,5 +343,15 @@ final class SmartJsonTest {
                 new Json.Of(deep)
             ).at("/ocean/rock1/nereid1/associates").at("/0").leaf("name").get()
         );
+    }
+
+    @Test
+    void knowsIfMissing() {
+        assertTrue(new SmartJson(new MissingJson()).isMissing());
+    }
+
+    @Test
+    void knowsIfNotMissing() {
+        assertFalse(new SmartJson(new Json.Of("{}")).isMissing());
     }
 }
