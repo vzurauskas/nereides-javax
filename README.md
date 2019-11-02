@@ -21,7 +21,7 @@ There is also a [Nereid for jackson-databind](https://github.com/vzurauskas/nere
 <dependency>
     <groupId>com.vzurauskas.nereides</groupId>
     <artifactId>nereides-javax</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -41,6 +41,25 @@ JsonStructure structure = javax.json.Json.createReader(
     new StringReader(jsonAsString)
 ).read();
 json = new Json.Of(structure);
+```
+
+### SmartJson
+Once we have the `Json` object, to use it in various ways, the [Smart Object pattern](https://www.yegor256.com/2016/04/26/why-inputstream-design-is-wrong.html) is employed.
+```java
+// Convert it to String:
+String textual = new SmartJson(json).textual();
+
+// Convert it to pretty formatted String:
+String pretty = new SmartJson(json).pretty();
+
+// Convert it to byte array:
+byte[] bytes = new SmartJson(json).byteArray();
+
+// Get a String field value:
+Optional<String> leaf = new SmartJson(json).leaf("nymph");
+
+// Get a deeply nested Json:
+SmartJson nested = new SmartJson(json).at("/path/to/nested/json");
 ```
 
 ## Custom implementations

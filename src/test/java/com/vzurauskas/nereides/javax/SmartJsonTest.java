@@ -133,7 +133,7 @@ final class SmartJsonTest {
             new SmartJson(
                 new Json.Of(
                     javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
+                        .add("stringField", "stringVal")
                         .add("intField", 5)
                         .build()
                 )
