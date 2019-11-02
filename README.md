@@ -16,6 +16,10 @@ There is also a [Nereid for jackson-databind](https://github.com/vzurauskas/nere
 
 *(Nereides are the sea nymphs who guided Jason's ship safely through the Wandering Rocks in his quest for the Golden Fleece.)
 
+Available Nereides:  
+-- [Nereid for Jackson](https://github.com/vzurauskas/nereides-jackson) (recommended)  
+-- [Nereid for javax.json](https://github.com/vzurauskas/nereides-javax)
+
 ## Maven dependency
 ```
 <dependency>
@@ -37,9 +41,7 @@ InputStream stream = new ByteArrayInputStream(jsonAsString.getBytes());
 json = new Json.Of(stream);
 
 // From javax.json.JsonStructure:
-JsonStructure structure = javax.json.Json.createReader(
-    new StringReader(jsonAsString)
-).read();
+JsonStructure structure = javax.json.Json.createReader(new StringReader(jsonAsString)).read();
 json = new Json.Of(structure);
 ```
 
@@ -156,6 +158,14 @@ Json accounts = new MutableJson()
     .with("name", "John")
     .with("surname", "Smith")
     .with("account", new BankAccount(iban, nickname));
+```
+
+## Additional functionality
+If available functionality in the current version of Nereid is not enough, the developer can always fall back to javax.json. Convert `Json` to `JsonStructure`, do what you need with it, and construct a new `Json`.
+```java
+JsonStructure structure = new SmartJson(json).jsonStructure();
+// Do stuff with structure using javax.json API.
+Json updated = new Json.Of(structure);
 ```
 
 ## Contributing
