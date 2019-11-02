@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.Optional;
+import javax.json.JsonException;
 import javax.json.JsonObject;
 import javax.json.JsonStructure;
 import javax.json.JsonValue;
@@ -176,10 +177,21 @@ public final class SmartJson implements Json {
      * @return The nested JSON, which could be missing.
      */
     public SmartJson at(String path) {
-        return new SmartJson(
-            new Of(
-                structure.value().asJsonObject().getValue(path).asJsonObject()
-            )
-        );
+        JsonObject whole = structure.value().asJsonObject();
+        JsonValue target;
+        try {
+            target = whole.getValue(path);
+        } catch (JsonException e) {
+            return new SmartJson(new MissingJson());
+        }
+        return new SmartJson(new Json.Of(target.asJsonObject()));
+    }
+
+    /**
+     * Method which tells if this JSON is missing.
+     * @return true if this JSON is missing; otherwise false.
+     */
+    public boolean isMissing() {
+        return byteArray().length == 0;
     }
 }
