@@ -106,7 +106,7 @@ public final class SmartJson implements Json {
      * @param name Name of the field to return.
      * @return Optional value of the field.
      */
-    public Optional<String> leaf(String name) {
+    public Optional<String> optLeaf(String name) {
         return Optional.of(structure.value().asJsonObject())
             .filter(
                 o -> o.containsKey(name)
@@ -116,11 +116,25 @@ public final class SmartJson implements Json {
     }
 
     /**
+     * Method to get a {@code String} type field of this JSON.
+     * @param name Name of the field to return.
+     * @return String value of the field, if the field exists.
+     * @throws IllegalArgumentException if field does not exist.
+     */
+    public String leaf(String name) {
+        return optLeaf(name).orElseThrow(
+            () -> new IllegalArgumentException(
+                "No such field of specified type: " + name
+            )
+        );
+    }
+
+    /**
      * Method to get an {@code int} type field of this JSON.
      * @param name Name of the field to return.
      * @return Optional value of the field.
      */
-    public Optional<Integer> leafAsInt(String name) {
+    public Optional<Integer> optLeafAsInt(String name) {
         JsonObject obj = structure.value().asJsonObject();
         return obj.containsKey(name)
             ? Optional.of(obj.getInt(name, 0))
@@ -128,11 +142,25 @@ public final class SmartJson implements Json {
     }
 
     /**
+     * Method to get an {@code int} type field of this JSON.
+     * @param name Name of the field to return.
+     * @return Int value of the field.
+     * @throws IllegalArgumentException if field does not exist.
+     */
+    public int leafAsInt(String name) {
+        return optLeafAsInt(name).orElseThrow(
+            () -> new IllegalArgumentException(
+                "No such field of specified type: " + name
+            )
+        );
+    }
+
+    /**
      * Method to get a {@code double} type field of this JSON.
      * @param name Name of the field to return.
      * @return Optional value of the field.
      */
-    public Optional<Double> leafAsDouble(String name) {
+    public Optional<Double> optLeafAsDouble(String name) {
         return Optional.of(structure.value().asJsonObject())
             .filter(o -> o.containsKey(name))
             .filter(
@@ -142,15 +170,43 @@ public final class SmartJson implements Json {
     }
 
     /**
+     * Method to get an {@code double} type field of this JSON.
+     * @param name Name of the field to return.
+     * @return Double value of the field.
+     * @throws IllegalArgumentException if field does not exist.
+     */
+    public double leafAsDouble(String name) {
+        return optLeafAsDouble(name).orElseThrow(
+            () -> new IllegalArgumentException(
+                "No such field of specified type: " + name
+            )
+        );
+    }
+
+    /**
      * Method to get a {@code boolean} type field of this JSON.
      * @param name Name of the field to return.
      * @return Optional value of the field.
      */
-    public Optional<Boolean> leafAsBool(String name) {
+    public Optional<Boolean> optLeafAsBool(String name) {
         JsonObject obj = structure.value().asJsonObject();
         return obj.containsKey(name)
             ? Optional.of(obj.getBoolean(name, false))
             : Optional.empty();
+    }
+
+    /**
+     * Method to get an {@code int} type field of this JSON.
+     * @param name Name of the field to return.
+     * @return Boolean value of the field.
+     * @throws IllegalArgumentException if field does not exist.
+     */
+    public boolean leafAsBool(String name) {
+        return optLeafAsBool(name).orElseThrow(
+            () -> new IllegalArgumentException(
+                "No such field of specified type: " + name
+            )
+        );
     }
 
     /**

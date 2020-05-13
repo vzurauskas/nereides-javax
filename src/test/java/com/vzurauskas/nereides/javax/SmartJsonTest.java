@@ -102,202 +102,12 @@ final class SmartJsonTest {
     }
 
     @Test
-    void findsLeaf() {
-        assertEquals(
-            "value2",
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("field1", "value1")
-                        .add("field2", "value2")
-                        .build()
-                )
-            ).leaf("field2").get()
-        );
-    }
-
-    @Test
-    void returnsEmptyOptionalForNonexistentLeaf() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder().build()
-                )
-            ).leaf("nonexistent").isPresent()
-        );
-    }
-
-    @Test
-    void returnsEmptyOptionalIfLeafIsNotString() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringVal")
-                        .add("intField", 5)
-                        .build()
-                )
-            ).leaf("intField").isPresent()
-        );
-    }
-
-    @Test
-    void findsLeafAsInt() {
-        assertEquals(
-            14,
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("intField", 14)
-                        .build()
-                )
-            ).leafAsInt("intField").get().intValue()
-        );
-    }
-
-    @Test
-    void returnsEmptyOptionalForNonexistentIntLeaf() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder().build()
-                )
-            ).leafAsInt("nonexistent").isPresent()
-        );
-    }
-
-    @Test
-    void returnsZeroIfLeafIsNotInt() {
-        assertEquals(
-            0,
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("intField", 5)
-                        .build()
-                )
-            ).leafAsInt("stringField").get().intValue()
-        );
-    }
-
-    @Test
-    void returnsIntEvenIfLeafIsDouble() {
-        assertEquals(
-            5,
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("doubleField", 5.9)
-                        .build()
-                )
-            ).leafAsInt("doubleField").get().intValue()
-        );
-    }
-
-    @Test
-    void findsLeafAsDouble() {
-        assertEquals(
-            14.9,
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("doubleField", 14.9)
-                        .build()
-                )
-            ).leafAsDouble("doubleField").get().doubleValue()
-        );
-    }
-
-    @Test
-    void returnsEmptyOptionalForNonexistentDoubleLeaf() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder().build()
-                )
-            ).leafAsDouble("nonexistent").isPresent()
-        );
-    }
-
-    @Test
-    void returnsEmptyOptionalIfLeafIsNotDouble() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("intField", 14)
-                        .build()
-                )
-            ).leafAsDouble("stringField").isPresent()
-        );
-    }
-
-    @Test
-    void returnsDoubleEvenIfLeafIsInt() {
-        assertEquals(
-            5.0,
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("intField", 5)
-                        .build()
-                )
-            ).leafAsDouble("intField").get().doubleValue()
-        );
-    }
-
-    @Test
-    void findsLeafAsBool() {
-        assertTrue(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("boolField", true)
-                        .build()
-                )
-            ).leafAsBool("boolField").get()
-        );
-    }
-
-    @Test
-    void returnsEmptyOptionalForNonexistentBooleanLeaf() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder().build()
-                )
-            ).leafAsBool("nonexistent").isPresent()
-        );
-    }
-
-    @Test
-    void returnsFalseIfLeafIsNotBool() {
-        assertFalse(
-            new SmartJson(
-                new Json.Of(
-                    javax.json.Json.createObjectBuilder()
-                        .add("stringField", "stringValue")
-                        .add("boolField", true)
-                        .build()
-                )
-            ).leafAsBool("stringField").get()
-        );
-    }
-
-    @Test
     void findsPath() {
         assertEquals(
             "red",
             new SmartJson(
                 new Json.Of(deep)
-            ).at("/ocean/rock1/nereid2").leaf("hair").get()
+            ).at("/ocean/rock1/nereid2").optLeaf("hair").get()
         );
     }
 
@@ -307,7 +117,7 @@ final class SmartJsonTest {
             "Jason",
             new SmartJson(
                 new Json.Of(deep)
-            ).at("/ocean/rock1/nereid1/associates/0").leaf("name").get()
+            ).at("/ocean/rock1/nereid1/associates/0").optLeaf("name").get()
         );
     }
 
@@ -341,7 +151,8 @@ final class SmartJsonTest {
             "Jason",
             new SmartJson(
                 new Json.Of(deep)
-            ).at("/ocean/rock1/nereid1/associates").at("/0").leaf("name").get()
+            ).at("/ocean/rock1/nereid1/associates").at("/0").optLeaf("name")
+                .get()
         );
     }
 
