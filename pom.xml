@@ -6,7 +6,7 @@
 
     <groupId>com.vzurauskas.nereides</groupId>
     <artifactId>nereides-javax</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.4</version>
     <name>Nereides for javax.json</name>
     <description>An object-oriented JSON wrapper for javax.json.</description>
     <url>https://github.com/vzurauskas/nereides-javax</url>
