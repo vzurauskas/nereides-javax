@@ -95,4 +95,12 @@ final class MutableJsonTest {
             ).with("nereid", new EmptyJson())
         ).affirm();
     }
+
+    @Test
+    void toStringOnEmpty() {
+        assertEquals(
+            "{}",
+            new MutableJson().toString()
+        );
+    }
 }

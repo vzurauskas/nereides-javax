@@ -52,12 +52,6 @@ public final class MutableJson implements Json {
         this.patch = patch;
     }
 
-    @Override
-    public InputStream bytes() {
-        this.base = patch.build().apply(base);
-        return new Json.Of(base).bytes();
-    }
-
     /**
      * Add a {@code String} field to this JSON.
      * @param name Name of the field.
@@ -112,5 +106,16 @@ public final class MutableJson implements Json {
     public MutableJson with(String name, Json value) {
         patch.add('/' + name, new SmartJson(value).jsonStructure());
         return this;
+    }
+
+    @Override
+    public InputStream bytes() {
+        this.base = patch.build().apply(base);
+        return new Json.Of(base).bytes();
+    }
+
+    @Override
+    public String toString() {
+        return new String(new ByteArray(this).value());
     }
 }

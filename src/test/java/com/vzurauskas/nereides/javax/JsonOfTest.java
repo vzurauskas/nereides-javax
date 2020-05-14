@@ -1,6 +1,7 @@
 package com.vzurauskas.nereides.javax;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -84,6 +85,14 @@ final class JsonOfTest {
         assertArrayEquals(
             string.getBytes(),
             new ByteArray(new Json.Of(string)).value()
+        );
+    }
+
+    @Test
+    void toStringWorksEvenIfMalformed() {
+        assertEquals(
+            "malformed",
+            new Json.Of("malformed").toString()
         );
     }
 }

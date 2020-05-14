@@ -37,7 +37,7 @@ public interface Json {
      * }
      * </pre>
      */
-    public final class Of implements Json {
+    final class Of implements Json {
         private final Json origin;
 
         /**
@@ -123,6 +123,11 @@ public interface Json {
         @Override
         public InputStream bytes() {
             return origin.bytes();
+        }
+
+        @Override
+        public String toString() {
+            return new String(new ByteArray(this).value());
         }
     }
 }
