@@ -92,7 +92,11 @@ public interface Json {
          * @param bytes JSON represented by an array of bytes.
          */
         public Of(byte[] bytes) {
-            this(new ByteArrayInputStream(bytes));
+            this(
+                new AutoResetInputStream(
+                    new ByteArrayInputStream(bytes)
+                )
+            );
         }
 
         /**
@@ -110,10 +114,18 @@ public interface Json {
          */
         public Of(Path path) {
             this(
-                () -> new Unchecked<>(
-                    () -> new ByteArrayInputStream(Files.readAllBytes(path))
-                ).value()
+                new Cached<>(
+                    () -> new Unchecked<>(
+                        () -> new AutoResetInputStream(
+                            new ByteArrayInputStream(Files.readAllBytes(path))
+                        )
+                    ).value()
+                )
             );
+        }
+
+        private Of(Cached<InputStream> cached) {
+            this(cached::value);
         }
 
         private Of(Json json) {

@@ -32,7 +32,7 @@ import javax.json.stream.JsonGenerator;
 public final class SmartJson implements Json {
 
     private final Json origin;
-    private final Unchecked<JsonStructure> structure;
+    private final Cached<JsonStructure> structure;
 
     /**
      * Constructor.
@@ -41,13 +41,15 @@ public final class SmartJson implements Json {
     public SmartJson(Json origin) {
         this(
             origin,
-            new Unchecked<>(
-                () -> javax.json.Json.createReader(origin.bytes()).read()
+            new Cached<>(
+                () -> new Unchecked<>(
+                    () -> javax.json.Json.createReader(origin.bytes()).read()
+                ).value()
             )
         );
     }
 
-    private SmartJson(Json origin, Unchecked<JsonStructure> structure) {
+    private SmartJson(Json origin, Cached<JsonStructure> structure) {
         this.origin = origin;
         this.structure = structure;
     }
